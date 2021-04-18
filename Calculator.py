@@ -19,13 +19,13 @@ eventbefore = ""
 # Create an event loop
 while True:
     event, values = window.read()
-
-    if event.isnumeric() == True and eventbefore == "=":
+    
+    if event.isnumeric() == True and eventbefore == "=" or event == "C":
         first_number = 0
         second_number = 0
         operation = ""
+        window["-OUTPUT-"].update(start_input)
 
-    
     if event == "+" or event =="-" or event =="*" or event=="/" :
         if not operation == "" and not second_number == 0:
             operation2 = event
@@ -77,41 +77,32 @@ while True:
             window["-OUTPUT-"].update(event)
             operation = event
             print(operation)
-    
+
+                                                                                           
     if event == "=":
         if operation == "+":
-            window["-OUTPUT-"].update(float(first_number)+float(second_number))
             final_number =(float(first_number)+float(second_number))
             print (final_number)
         elif operation == "-":
-            window["-OUTPUT-"].update(float(first_number)-float(second_number))
             final_number = (float(first_number)-float(second_number))
             print (final_number)
         elif operation == "*":
-            window["-OUTPUT-"].update(float(first_number)*float(second_number))
             final_number = (float(first_number)*float(second_number))
             print (final_number)
         elif operation == "/":
-            window["-OUTPUT-"].update(float(first_number)/float(second_number))
             final_number = (float(first_number)/float(second_number))
             print (final_number)
+        window["-OUTPUT-"].update(final_number)
         operation = ""
         first_number = final_number
         second_number = 0
         final_number = 0
 
-    if event == "C":
-        first_number = 0
-        second_number = 0
-        operation = ""
-        window["-OUTPUT-"].update(start_input)
-
-        
+   
     if event == "CLOSE" or event == sg.WIN_CLOSED:
         break
 
     eventbefore = event
-    print (eventbefore)
 
 
 window.close()
