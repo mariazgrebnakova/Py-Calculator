@@ -9,9 +9,9 @@ layout = [[sg.Text("Result:"), sg.Text(size=(15,1), key="-OUTPUT-")],[sg.Input(s
 # Create the window
 window = sg.Window("Calculator", layout, margins=(100,100))
 
-x = 0 #first number
-y = 0 #second number
-z = 0 #final number
+first_number = 0
+second_number = 0
+final_number = 0
 operation = ""
 operation2 = ""
 eventbefore = ""
@@ -19,47 +19,53 @@ eventbefore = ""
 # Create an event loop
 while True:
     event, values = window.read()
+
+    if event.isnumeric() == True and eventbefore == "=":
+        first_number = 0
+        second_number = 0
+        operation = ""
+
     
     if event == "+" or event =="-" or event =="*" or event=="/" :
-        if not operation == "" and not y == 0:
+        if not operation == "" and not second_number == 0:
             operation2 = event
         
             if operation == "+":
-                window["-OUTPUT-"].update(float(x)+float(y))
-                z =(float(x)+float(y))
-                print (z)
+                window["-OUTPUT-"].update(float(first_number)+float(second_number))
+                final_number =(float(first_number)+float(second_number))
+                print (final_number)
             elif operation == "-":
-                z = (float(x)-float(y))
+                final_number = (float(first_number)-float(second_number))
             elif operation == "*":
-                z = (float(x)*float(y))
+                final_number = (float(first_number)*float(second_number))
             elif operation == "/":
-                z = (float(x)/float(y))
+                final_number = (float(first_number)/float(second_number))
 
-            print (z)
+            print (final_number)
 
-            x = z
-            y = 0
+            first_number = final_number
+            second_number = 0
             operation = operation2
             operation2 = ""
     
     
     if event.isnumeric() == True:
-        if not operation == "" and y == 0:
-            y = event
-            print (y)
+        if not operation == "" and second_number == 0:
+            second_number = event
+            print (second_number)
         elif not operation == "" and eventbefore.isnumeric() == True:
-            y = y + event
-            print (y)
-        elif x == 0:
-            x = event
-            print (x)
-        elif not x == 0 and operation == "":
-            x = x + event
-            print (x)
+            second_number = second_number + event
+            print (second_number)
+        elif first_number == 0:
+            first_number = event
+            print (first_number)
+        elif not first_number == 0 and operation == "":
+            first_number = first_number + event
+            print (first_number)
         if not operation == "":
-            window["-OUTPUT-"].update(y)
+            window["-OUTPUT-"].update(second_number)
         else:
-            window["-OUTPUT-"].update(x)
+            window["-OUTPUT-"].update(first_number)
 
         
     if event == "+" or event =="-" or event =="*" or event=="/" and operation == "":
@@ -67,36 +73,36 @@ while True:
         operation = event
         print(operation)
     elif event == "+" or event =="-" or event =="*" or event=="/" and not operation == "":
-        if y == 0:
+        if second_number == 0:
             window["-OUTPUT-"].update(event)
             operation = event
             print(operation)
     
     if event == "=":
         if operation == "+":
-            window["-OUTPUT-"].update(float(x)+float(y))
-            z =(float(x)+float(y))
-            print (z)
+            window["-OUTPUT-"].update(float(first_number)+float(second_number))
+            final_number =(float(first_number)+float(second_number))
+            print (final_number)
         elif operation == "-":
-            window["-OUTPUT-"].update(float(x)-float(y))
-            z = (float(x)-float(y))
-            print (z)
+            window["-OUTPUT-"].update(float(first_number)-float(second_number))
+            final_number = (float(first_number)-float(second_number))
+            print (final_number)
         elif operation == "*":
-            window["-OUTPUT-"].update(float(x)*float(y))
-            z = (float(x)*float(y))
-            print (z)
+            window["-OUTPUT-"].update(float(first_number)*float(second_number))
+            final_number = (float(first_number)*float(second_number))
+            print (final_number)
         elif operation == "/":
-            window["-OUTPUT-"].update(float(x)/float(y))
-            z = (float(x)/float(y))
-            print (z)
+            window["-OUTPUT-"].update(float(first_number)/float(second_number))
+            final_number = (float(first_number)/float(second_number))
+            print (final_number)
         operation = ""
-        x = z
-        y = 0
-        z = 0
+        first_number = final_number
+        second_number = 0
+        final_number = 0
 
     if event == "C":
-        x = 0
-        y = 0
+        first_number = 0
+        second_number = 0
         operation = ""
         window["-OUTPUT-"].update(start_input)
 
