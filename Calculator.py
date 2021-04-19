@@ -1,10 +1,20 @@
 import PySimpleGUI as sg
 
+sg.theme('DarkBlue9')
+#sg.theme_previewer()
+
 start_input = "0"
-layout = [[sg.Text("Result:"), sg.Text(size=(15,1), key="-OUTPUT-")],[sg.Input(start_input)],
-          [sg.Button("CLOSE"), sg.Button("1"),sg.Button("2"),sg.Button("3"),sg.Button("4"),sg.Button("5"),
-                                                sg.Button("6"),sg.Button("7"),sg.Button("8"),sg.Button("9"),sg.Button("0"), sg.Button("+"),
-                                                sg.Button("-"),sg.Button("*"),sg.Button("/"),sg.Button("="), sg.Button("C")]]
+
+def button(button_text):
+    return sg.Button(button_text, size=(5, 1), font=("Helvetica", 20))
+
+layout =[[sg.Text("Result:"), sg.Text(size=(15,1), key="-OUTPUT-")],
+        [sg.InputText(key=("-INPUT-"))],
+        [button(t) for t in ("7","8","9","/")],
+        [button(t) for t in ("4","5","6","*")],
+        [button(t) for t in ("1","2","3","-")],
+        [button(t) for t in ("0","C","=","+")]]
+         
 
 # Create the window
 window = sg.Window("Calculator", layout, margins=(100,100))
