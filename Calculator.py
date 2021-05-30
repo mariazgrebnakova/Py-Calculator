@@ -29,8 +29,12 @@ eventbefore = ""
 # Create an event loop
 while True:
     event, values = window.read()
-    
-    if event.isnumeric() == True and eventbefore == "=" or event == "C":
+
+    if event == sg.WIN_CLOSED:
+        break
+
+    # reset state
+    if (event.isnumeric() == True and eventbefore == "=") or event == "C":
         first_number = 0
         second_number = 0
         operation = ""
@@ -93,10 +97,6 @@ while True:
         first_number = final_number
         second_number = 0
         final_number = 0
-
-   
-    if event == "CLOSE" or event == sg.WIN_CLOSED:
-        break
 
     eventbefore = event
 
