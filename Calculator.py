@@ -28,6 +28,21 @@ eventbefore = ""
 
 operations = ["+", "-", "*", "/"]
 
+def calculate_result (f_operation, f_first_number, f_second_number):
+    result = 0
+    f_first_number = float(f_first_number)
+    f_second_number = float(f_second_number)
+    if f_operation == "+":
+        result = (f_first_number + f_second_number)
+    elif operation == "-":
+        result = (f_first_number - f_second_number)
+    elif operation == "*":
+        result = (f_first_number * f_second_number)
+    elif operation == "/":
+        result = (f_first_number / f_second_number)
+
+    return result
+
 # Create an event loop
 while True:
     event, values = window.read()
@@ -46,17 +61,8 @@ while True:
     if event in operations:
         if not operation == "" and not second_number == 0:
             operation2 = event
-        
-            if operation == "+":
-                window["-OUTPUT-"].update(float(first_number)+float(second_number))
-                final_number =(float(first_number)+float(second_number))
-            elif operation == "-":
-                final_number = (float(first_number)-float(second_number))
-            elif operation == "*":
-                final_number = (float(first_number)*float(second_number))
-            elif operation == "/":
-                final_number = (float(first_number)/float(second_number))
 
+            final_number = calculate_result(operation, first_number, second_number)
             first_number = final_number
             second_number = 0
             operation = operation2
@@ -88,14 +94,7 @@ while True:
 
     # handle equals button
     if event == "=":
-        if operation == "+":
-            final_number =(float(first_number)+float(second_number))
-        elif operation == "-":
-            final_number = (float(first_number)-float(second_number))
-        elif operation == "*":
-            final_number = (float(first_number)*float(second_number))
-        elif operation == "/":
-            final_number = (float(first_number)/float(second_number))
+        final_number = calculate_result(operation, first_number, second_number)
         window["-OUTPUT-"].update(final_number)
         operation = ""
         first_number = final_number
