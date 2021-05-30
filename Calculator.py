@@ -26,6 +26,8 @@ operation = ""
 operation2 = ""
 eventbefore = ""
 
+operations = ["+", "-", "*", "/"]
+
 # Create an event loop
 while True:
     event, values = window.read()
@@ -40,7 +42,8 @@ while True:
         operation = ""
         window["-OUTPUT-"].update(start_input)
 
-    if event == "+" or event =="-" or event =="*" or event=="/" :
+    # handle operation buttons
+    if event in operations:
         if not operation == "" and not second_number == 0:
             operation2 = event
         
@@ -59,7 +62,7 @@ while True:
             operation = operation2
             operation2 = ""
     
-    
+    # handle numeric buttons
     if event.isnumeric() == True:
         if not operation == "" and second_number == 0:
             second_number = event
@@ -74,15 +77,16 @@ while True:
         else:
             window["-OUTPUT-"].update(first_number)
 
-        
-    if event == "+" or event =="-" or event =="*" or event=="/" and operation == "":
+    # handle operation buttons
+    if (event in operations) and operation == "":
         window["-OUTPUT-"].update(event)
         operation = event
-    elif event == "+" or event =="-" or event =="*" or event=="/" and not operation == "":
+    elif (event in operations) and not operation == "":
         if second_number == 0:
             window["-OUTPUT-"].update(event)
             operation = event
-                                                                                           
+
+    # handle equals button
     if event == "=":
         if operation == "+":
             final_number =(float(first_number)+float(second_number))
