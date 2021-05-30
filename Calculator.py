@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 
 sg.theme('DarkBlue9')
-#sg.theme_previewer()
+#sg.theme_previewer() # uncomment for setting color scheme
 
 start_input = "0"
 
@@ -43,15 +43,12 @@ while True:
             if operation == "+":
                 window["-OUTPUT-"].update(float(first_number)+float(second_number))
                 final_number =(float(first_number)+float(second_number))
-                print (final_number)
             elif operation == "-":
                 final_number = (float(first_number)-float(second_number))
             elif operation == "*":
                 final_number = (float(first_number)*float(second_number))
             elif operation == "/":
                 final_number = (float(first_number)/float(second_number))
-
-            print (final_number)
 
             first_number = final_number
             second_number = 0
@@ -62,16 +59,12 @@ while True:
     if event.isnumeric() == True:
         if not operation == "" and second_number == 0:
             second_number = event
-            print (second_number)
         elif not operation == "" and eventbefore.isnumeric() == True:
             second_number = second_number + event
-            print (second_number)
         elif first_number == 0:
             first_number = event
-            print (first_number)
         elif not first_number == 0 and operation == "":
             first_number = first_number + event
-            print (first_number)
         if not operation == "":
             window["-OUTPUT-"].update(second_number)
         else:
@@ -81,27 +74,20 @@ while True:
     if event == "+" or event =="-" or event =="*" or event=="/" and operation == "":
         window["-OUTPUT-"].update(event)
         operation = event
-        print(operation)
     elif event == "+" or event =="-" or event =="*" or event=="/" and not operation == "":
         if second_number == 0:
             window["-OUTPUT-"].update(event)
             operation = event
-            print(operation)
-
                                                                                            
     if event == "=":
         if operation == "+":
             final_number =(float(first_number)+float(second_number))
-            print (final_number)
         elif operation == "-":
             final_number = (float(first_number)-float(second_number))
-            print (final_number)
         elif operation == "*":
             final_number = (float(first_number)*float(second_number))
-            print (final_number)
         elif operation == "/":
             final_number = (float(first_number)/float(second_number))
-            print (final_number)
         window["-OUTPUT-"].update(final_number)
         operation = ""
         first_number = final_number
