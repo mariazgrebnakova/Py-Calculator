@@ -59,6 +59,7 @@ while True:
 
     # handle operation buttons
     if event in operations:
+        # handle chaining of operations
         if not operation == "" and not second_number == 0:
             operation2 = event
 
@@ -67,6 +68,10 @@ while True:
             second_number = 0
             operation = operation2
             operation2 = ""
+
+        if operation == "" or second_number == 0:
+            window["-OUTPUT-"].update(event)
+            operation = event
     
     # handle numeric buttons
     if event.isnumeric() == True:
@@ -83,15 +88,6 @@ while True:
         else:
             window["-OUTPUT-"].update(first_number)
 
-    # handle operation buttons
-    if (event in operations) and operation == "":
-        window["-OUTPUT-"].update(event)
-        operation = event
-    elif (event in operations) and not operation == "":
-        if second_number == 0:
-            window["-OUTPUT-"].update(event)
-            operation = event
-
     # handle equals button
     if event == "=":
         final_number = calculate_result(operation, first_number, second_number)
@@ -103,7 +99,4 @@ while True:
 
     eventbefore = event
 
-
 window.close()
-
-
