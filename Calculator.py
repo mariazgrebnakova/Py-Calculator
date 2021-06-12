@@ -1,23 +1,24 @@
 import PySimpleGUI as sg
 
 sg.theme('DarkBlue9')
-#sg.theme_previewer() # uncomment for setting color scheme
+# sg.theme_previewer() # uncomment for setting color scheme
 
 start_input = "0"
+
 
 def button(button_text):
     return sg.Button(button_text, size=(5, 1), font=("Helvetica", 20))
 
-layout =[[sg.Text("Result:"), sg.Text(size=(15,1), key="-OUTPUT-")],
-        [sg.InputText(key=("-INPUT-"))],
-        [button(t) for t in ("7","8","9","/")],
-        [button(t) for t in ("4","5","6","*")],
-        [button(t) for t in ("1","2","3","-")],
-        [button(t) for t in ("0","C","=","+")]]
-         
+
+layout = [[sg.Text("Result:"), sg.Text(size=(15, 1), key="-OUTPUT-")],
+          [sg.InputText(key=("-INPUT-"))],
+          [button(t) for t in ("7", "8", "9", "/")],
+          [button(t) for t in ("4", "5", "6", "*")],
+          [button(t) for t in ("1", "2", "3", "-")],
+          [button(t) for t in ("0", "C", "=", "+")]]
 
 # Create the window
-window = sg.Window("Calculator", layout, margins=(100,100))
+window = sg.Window("Calculator", layout, margins=(100, 100))
 
 first_number = 0
 second_number = 0
@@ -28,7 +29,8 @@ eventbefore = ""
 
 operations = ["+", "-", "*", "/"]
 
-def calculate_result (f_operation, f_first_number, f_second_number):
+
+def calculate_result(f_operation, f_first_number, f_second_number):
     result = 0
     f_first_number = float(f_first_number)
     f_second_number = float(f_second_number)
@@ -42,6 +44,7 @@ def calculate_result (f_operation, f_first_number, f_second_number):
         result = (f_first_number / f_second_number)
 
     return result
+
 
 # Create an event loop
 while True:
@@ -72,7 +75,7 @@ while True:
         if operation == "" or second_number == 0:
             window["-OUTPUT-"].update(event)
             operation = event
-    
+
     # handle numeric buttons
     if event.isnumeric() == True:
         if not operation == "" and second_number == 0:
