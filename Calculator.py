@@ -36,11 +36,11 @@ def calculate_result(f_operation, f_first_number, f_second_number):
     f_second_number = float(f_second_number)
     if f_operation == "+":
         result = (f_first_number + f_second_number)
-    elif operation == "-":
+    elif f_operation == "-":
         result = (f_first_number - f_second_number)
-    elif operation == "*":
+    elif f_operation == "*":
         result = (f_first_number * f_second_number)
-    elif operation == "/":
+    elif f_operation == "/":
         result = (f_first_number / f_second_number)
 
     return result
